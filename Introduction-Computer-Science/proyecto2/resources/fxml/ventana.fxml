@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import mx.unam.ciencias.icc.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="777.0"
+            fx:controller="mx.unam.ciencias.icc.ControladorVentana"
+            xmlns:fx="http://javafx.com/fxml">
+  <top>
+    <MenuBar BorderPane.alignment="CENTER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Base de Datos">
+          <items>
+            <MenuItem fx:id="conectar" mnemonicParsing="false" onAction="#conectar" text="Conectar...">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem fx:id="desconectar" mnemonicParsing="false" onAction="#desconectar" text="Desconectar">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Peliculas">
+          <items>
+            <MenuItem fx:id="editar" mnemonicParsing="false" onAction="#editaPelicula" text="Editar..." />
+            <MenuItem fx:id="agregar" mnemonicParsing="false" onAction="#agregaPelicula" text="Agregar..." />
+            <MenuItem fx:id="eliminar" mnemonicParsing="false" onAction="#eliminaPeliculas" text="Eliminar" />
+            <MenuItem fx:id="buscar" mnemonicParsing="false" onAction="#buscaPeliculas" text="Buscar..." />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Ayuda">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de..." />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </top>
+</BorderPane>

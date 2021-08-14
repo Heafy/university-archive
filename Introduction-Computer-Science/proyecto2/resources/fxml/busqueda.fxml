@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="118.0" prefWidth="359.0" styleClass="background"
+            fx:controller="mx.unam.ciencias.icc.ControladorBusqueda"
+            xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <GridPane layoutX="30.0" layoutY="28.0" prefHeight="60.0" prefWidth="359.0"
+              AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" >
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="111.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="10.0" prefWidth="261.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      </rowConstraints>
+      <children>
+        <Label text="Campo:" />
+        <Label text="Valor:" GridPane.rowIndex="1" />
+        <ComboBox fx:id="campo" GridPane.columnIndex="1">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Titulo             " />
+	      <String fx:value="Director           " />
+              <String fx:value="Year               " />
+              <String fx:value="Genero             " />
+              <String fx:value="Duracion           " />
+            </FXCollections>
+          </items>
+          <value>
+            <String fx:value="Titulo" />
+          </value>
+        </ComboBox>
+        <TextField fx:id="valor" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      </children>
+    </GridPane>
+    <ButtonBar layoutX="116.0" layoutY="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <buttons>
+        <Button defaultButton="true" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" />
+        <Button mnemonicParsing="false" onAction="#cancelar" prefWidth="120.0" text="Cancelar" />
+      </buttons>
+    </ButtonBar>
+  </children>
+</AnchorPane>

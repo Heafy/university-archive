@@ -1,0 +1,37 @@
+.data
+
+v: 		.word 0x11		# Valor cualquiera para	v
+w: 		.word 0x12		# Valor cualquiera para w
+y: 		.word 0x13		# Valor cualquiera para y
+z: 		.word 0x14 		# Valor cualquiera para z
+aux:	.word 0xef1		# Valor 0xef1
+aux23: 	.word 0x23		# Valor 23
+
+.text
+main: 	# Agregamos los registros v, w, y, z y aux para usarlos en las operaciones
+		lw $t0, v 		#Agregamos el valor v al registro t0
+		lw $t1, w 		#Agregamos el valor w al registro t1
+		lw $t2, y		#Agregamos el valor y al registro t2
+		lw $t3, z		#Agregamos el valor z al registro t3
+		lw $t4, aux		#Agregamos el valor 0x3f1 al registro t4
+		lw $t5, aux23	#agregamos el valor 23 al registro t5
+
+		# x = y + z
+		add $t6 $t2, $t3	# Realizamos la operacion x = y + z y la guardamos en t5
+
+		# x = (z + w) + (z + (y + (w - v)))
+		add $s0, $t3, $t1	# z + w
+		sub $s1, $t1, $t0 	# w - v
+		add $s2, $t2, $s1	# y + (w - v)
+		add $s3, $t3, $s2	# z + (y + (w - v))
+		add $t7 $s0, $s3	# (z + w) + (z + (y + (w - v)))
+
+		# x = (w - z) + (x + 23) 
+		sub $s4, $t1, $t3 	# w - z
+		add $s5, $t7, $t5 		# (x + 23) Tomando como x el valor guardado en el registro anterior
+		add $t8 $s4, $s5	# x = (w - z) + (x + 23) 
+
+		# x = v + 0xef1
+		add $t9 $t0, $t4 	#x = v + 0xef1
+
+		jr $ra

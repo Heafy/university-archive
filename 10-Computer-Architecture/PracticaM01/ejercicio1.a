@@ -1,0 +1,8 @@
+.data
+
+value: 	.word 0x11		# Algun valor cualquiera
+
+.text
+main: 	lw $t0, value 	# Agregamos el valor al registro t0
+		la $t1, ($t0) 	# Usamos la pseudo instruccion 'la' para copiar al registro t0 al valor t1
+		jr $ra

@@ -1,0 +1,244 @@
+%++++++++++++++++++++++++++++++++++++++++
+% Don't modify this section unless you know what you're doing!
+\documentclass[letterpaper,12pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{graphicx} % Graphics library
+\newcommand{\ecb}{elemento de combinación booleano }
+\newcommand{\ccb}{circuito de combinación booleano }
+\setlength\parskip{\baselineskip} % New line after each paragraph
+\setlength\parindent{0pt} % Remove indent
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+
+
+\begin{document}
+
+\title{Tarea 04}
+\author{Martínez Flores Jorge Yael}
+\date{\today}
+\maketitle
+
+\section{Knapsack Problem$^{1}$}
+\subsection{Problema estandar}
+
+Un item (o elemento) $i$ es un objeto con con valor $v_i$ y peso $w_i$ con $v_i, 
+w_i \in \mathds{Z}^+$.
+
+El problema knapsack (o problema de la mochila) consite en: Dado un conjunto
+de $n$ elementos y un entero $K$.  Existe un límite $W$ del peso total de 
+items que se pueden elegir. Se deben escoger algunos artículos 
+(sin repeticiones) para maximizar el valor total.
+
+Es decir, se busca el subconjunto 
+$S \subseteq \{ 1, \dots , n \}$ tal que $\sum_{i \in S} w_i \le W$ y $\sum_{i \in S} 
+v_i \ge K$
+
+\subsection{PD. Knapsack es NP-Completo}
+
+\subsubsection{PD. Knapsack $\in$ NP}
+
+Un algoritmo determinista que corra en tiempo polinomial con una nd-choice que eliga
+los items en la fase adivinadora mientras $w_i \le  W$. Posteriormente en la fase
+verificadora se verifica si los items son los optimos para resolver el problema. Por 
+lo tanto el problema Knapsack está en NP.
+
+$$ \therefore \text{KNAPSACK } \in \text{NP} $$
+
+\subsubsection{PD. Exact cover by 3-sets $\varpropto$ Knapsack}
+
+Nos fijamos en el caso especial en el cual $v_i = w_i \ \forall i$ y $K = W$.
+Entonces dado un conjunto de $n$ enteros $w_i, \dots, w_n$ y un entero $K$, 
+se busca encontrar un subconjunto de enteros tal que la suma de los enteros dados 
+sea exactamente $K$.
+
+Reducimos el problema de la cobertura exacta de 3 vértices al problema de la 
+mochila. Dado un ejemplar $\{ S_1, S_2, \dots, S_n \}$ de cobertura exacta de 3 
+vértices, donde la pregunta es si existen conjuntos disjuntos entre estos que 
+cubren el conjunto $U = \{1,2, \dots, 3m\}$.
+
+Pensando en el conjunto dado como vectores en $\{  0,1 \}^{3m}$. Dichos vectores 
+pueden ser vistos también como números binarios y la unión de los conjuntos se 
+parece a la suma de enteros. La meta es encontrar un subjconjunto de dichos enteros 
+tal que sumen $K = 2^n-1$. Hasta este punto la reducción parece completa.
+
+Pero existe un "error" en esta reducción. La suma de números binarios es diferente 
+a la unión de conjuntos en el sentido que esta lleva un acarreo por la suma de bits. 
+Por ejemplo $3+5+7=15$ en binario daría como resultados 0011 + 0101 + 0111 = 1111. 
+Pero sus conjuntos correspondientes $\{  3, 4 \}, \{ 2, 4 \}$ y $\{ 2, 3, 4 \}$ no 
+son disjuntos, tampoco la unión $\{ 1, 2, 3, 4 \}$ lo es.
+
+Existe una manera mas simple para resolver este problema: Considere los vectores 
+como enteros que no están en base 2. Si no en base $n+1$. Esto es, el conjunto $S_i$ 
+es el entero $w_i  = \sum_{j \in S_i} (n+1)^{3m-j}$.
+
+Entonces ya no puede existir acarreo en la suma de los $n$ números. Podemos ver que 
+hay un conjunto de estos números enteros que suman $K = \sum_{j = 0}^{3m-1} (n+1)^j$ 
+si y solo si existe una cubierta de vértices exacta entre $\{  S_1, S_2, \dots, S_n \}$.
+
+$$ \therefore \text{KNAPSACK } \in \text{NP-Completo} $$
+
+\section{Circuit Sat$^{2}$}
+
+Un \ecb es un circuito que tiene un número constante de entradas booleanas y salidas y realiza una función bien definida.
+Los valores booleanos que puede representar son $\{ 0,1 \}$ donde $0$ significa
+FALSE y 1 representa TRUE;
+
+Un \ccb es uno o más elementos de combinación booleanos interconectados por cables.
+Un cable puede conectarse de la salida de un elemento a la entrada de otro, de 
+ese modo la salida del primer elemento es la entrada del segundo. El tamaño de un 
+\ccb es el número de elementos de combinaciones booleanas mas el número de 
+cables en el circuito.Un cable no puede tener mas de una salida de algún elemento 
+conectado a este, pero puede tener varias entradas. Si no hay un elemento de 
+salida conectado al cable, este es un circuito de entrada. Si no hay elementos 
+de entrada conectado al cable, este es un circuito de salida. 
+
+Una asignación de verdad para un \ccb es un conjunto de entradas booleanas. 
+Decimos que un \ccb con una sola salida es satisfacible si tiene una asignación
+de verdad que lo satisface. El problema de la satisfacción en circuitoS es: Dado un 
+\ccb $C$ compuesto por compuertas lógicas $AND$, $OR$ y $NOT$, ¿$C$ es satisfacible?
+
+Dado un circuito $C$, se debe intentar determinar si es satisfacible revisando
+todas las posibles asignaciones a las entradas. Si el circuito tiene $k$ entradas y 
+el tamaño de $C$ es polinomial en $k$, entonces se deben revisar $2^k$ posibles 
+asignaciones.
+
+\subsection{PD. Circuit Sat es NP-Completo}
+\subsubsection{PD. Circuit-Sat $\in$ NP}
+
+Se dan dos entradas a un algoritmo no determinista de tiempo polinomial $A$. La
+primera entrada es un \ccb $C$, la otra entrada es un certificado que corresponde a
+una asignación de valores booleanos a los cables de $C$.
+
+Construimos $A$ de la siguiente manera: Para cada compuerta lógica en el circuito, 
+revisa que el valor dado por el certificado en la salida del cable es correctamente
+calculado como función de los valores en la entrada de los cables. Entonces, si la
+salida del circuito es $1$, el algoritmo devuelve $1$, ya que los valores 
+asignados a $C$ lo satisfacen. En otro caso $A$ devuelve $0$.
+
+Siempre que un circuito satisfacible $C$ sea una entrada a un algoritmo $A$, existe
+un certificado cuya longitud es es polinomial al tamaño de $C$ lo cual causa que la
+salida de $A$ sea $1$. Siempre que un $A$ reciba como entrada a un circuito no 
+satisfacible, no existirá un certificado para que el circuito sea satisfacible. 
+
+$$ \therefore \text{CIRCUIT-SAT} \in \text{NP} $$
+
+\subsubsection{PD. Circuit-Sat $\in$ NP-Completo}
+
+Un programa es almacenado en la memoria de la computadora como una serie de 
+instrucciones. Una instrucción contiene una operación a ser realizada, las 
+direcciones de memoria que necesita y la dirección de memoria donde es almacenada.
+Una dirección específica de memoria llamada contador del programa vigila
+cual instrucción será ejecutada, aumentando automáticamente tras cada ejecución 
+de una instrucción. 
+
+Durante la ejecución de un programa, la memoria de la computadora almacena todo el
+estado del calculo. Llamamos a cualquier estado particular de la memoria de la
+computadora como una configuración, Entonces ahora la ejecución de una 
+instrucción es el mapeo de una configuración a otra. El hardware que acompaña a este
+mapeo puede ser representado como un \ccb.
+
+Sea $L$ un lenguaje en NP. Debemos describir un algoritmo en tiempo polinomial $F$
+para calcular una función de reducción $f$ que mapee cada cadena binaria $x$ a un 
+circuito $C = f(x)$ tal que $x \in L$ si y solo si $C \in$ CIRCUIT-SAT.
+
+Ya que $L \in NP$, debe existir un algoritmo $A$ que verifique a $L$ en tiempo 
+polinomial. El algoritmo $F$ que se debe construir usa las dos entradas del 
+algoritmo $A$ descrito anteriormente para calcular la función de reducción $f$.
+
+Sea $T(n)$ el peor caso del algoritmo $A$ con una longitud de $n$ cadenas. Sea
+$k \ge 1$ un número tal que $T(n) + O(n^k)$ con la longitud del certificado
+$O(n^k)$ (El tiempo de ejecución de A es actualmente polinomial en el tamaño total
+de la entrada, la cual incluye la cadena de entrada y el certificado).
+
+La idea principal de la demostración es representar el cálculo de $A$ como una 
+secuencia de configuraciones.El circuito combinado $M$, el cual implementado el 
+hardware, mapea cada computadora $c_i$ a la siguiente configuración $c_{i+1}$, 
+empezando desde la configuración inicial $c_0$. El algoritmo inicial $A$ 
+devuelve la salida $0$ ó $1$ para algúna ubicación designada para el momento 
+en el que termine su ejecución, si asumimos que a partir de entonces $A$ se 
+detiene, entonces el valor nunca cambia. Esto si el algoritmo se ejecuta en 
+el menos $T(n)$ pasos, la salida resulta como uno de los bits en $c_{T(n)}$.
+
+El algoritmo de reducción $F$ construye un circuito  de combinación que calcula
+todas las configuraciones producidas por una configuración inicial dada. La idea
+es pegar $T(n)$ con copias del circuito $M$. La salida del $i$-ésimo circuito, el
+cual produce la configuración $c_i$, es la entrada del $(i+1)$-ésimo circuito.
+Entonces estas configuraciones, en lugar de ser almacenadas en la memoria, 
+se quedan como valores en los cables conectados a las copias de $M$.
+
+Dado una entrada $x$, debemos crear un circuito $C = f(x)$ que sea satisfacible si
+y solo si existe un certificado $y$ tal que $A(x,y) = 1$. Cuando $F$ tiene la
+entrada $x$, primero calcula $n = |x|$ y construye un \ccb $C'$ que contiene $T(n)$
+copias de $M$. La entrada para $C'$ es una configuración inicial que corresponde a 
+un cómputo en $A(x,y)$ y la salida es la configuración $c_{T(n)}$.
+
+$F$ modifica el circuito $C'$ para construir el circuito $C=f(x)$ con los siguientes
+ pasos:
+
+\begin{enumerate}
+	\item Conecta las entradas a $C'$ correspondiente al programa para $A$, al 
+	contador inicial, la entrada $x$ y al estado inicial de la memoria directamente
+	a estos valores. Por lo tanto las entradas restantes del circuito corresponden al
+	certificado $y$.
+	\item Ignora todas las salidas de $C'$, excepto por el bit $C(y) = A(x,y)$ 
+	para cualquier entrada $y$ de longitud $O(n^k)$.
+\end{enumerate}
+
+El algoritmo de reducción $F$ cuando se le proporciona una cadena de entrada $x$, 
+calcula dicho circuito $C$.
+
+Necesitamos probar dos propiedades:
+
+\begin{enumerate}
+	\item Mostrar que $F$ calcula correctamente una función de reducción $f$. Esto es, 
+	debemos mostrar que $C$ es satisfacible si y solo si existe un certificado $y$ 
+	tal que $A(x,y) = 1$
+	\item Mostrar que $F$ se ejecuta en tiempo polinomial. 
+\end{enumerate}
+
+supongamos que existe un certificado $y$ de longitud $O(n^k)$ tal que $A(x,y)=1$. 
+Entonces, si aplicamos los bits de $y$ a las entradas de $C$, la salida de $C$ es 
+$C(y)=A(x,y)=1$. Por lo tanto, si el certificado existe, entonces $C$ es 
+satisfacible. Por lo tanto existe una entrada $y$ para $C$ tal que $C(y)=1$, por lo
+que concluimos que $A(x,y)=1$. Por lo tanto $F$ calcula correctamente la función
+de reducción.
+
+Notese que el número de bits requeridos para representar una configuración es 
+polinomial en $n$. El programa para $A$ tiene un tamaño constante, independiente
+de la longitud de la longitud de su entrada $x$. La longitud de de la entrada $x$
+es $n$ y la longitud del certificado $y$ es $O(n^k)$. Dado que el algoritmo se 
+ejecuta en al menos $O(n^k)$ pasos, la cantidad de memoria para el trabajo requerido
+por $A$ es polinomial en $n$.
+
+El circuito $C$ consiste en a lo más $t=O(n^k)$ copias de $M$ y por lo tanto
+tiene tamaño polinomial en $n$. El algoritmo de reducción $F$ puede construir $C$
+a partir de $x$ en tiempo polinomial, dado que cada paso de la construcción tiene
+tiempo polinomial.
+
+$$ \therefore \text{CIRCUIT-SAT} \in \text{NP-Completo} $$
+
+\begin{thebibliography}{99}
+
+\bibitem{Papadimitriou}
+[201 -203] Christos H. Papadimitriou, \textit{Computational Complexity},
+(University of California, San Diego, 1995).
+
+\bibitem{Cormen}
+[987 - 994] Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and 
+Clifford Stein, \textit{Introduction to Algorithms},
+(MIT Press, Massachusetts, 2009).
+
+\end{thebibliography}
+
+\end{document}

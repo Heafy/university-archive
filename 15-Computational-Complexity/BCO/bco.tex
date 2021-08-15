@@ -1,0 +1,301 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+%\usepackage{graphicx} % Graphics library
+\setlength\parskip{10pt} % New line after each paragraph
+\setlength\parindent{0pt} % Remove indent
+\usepackage[font={small}]{caption, subfig}
+\renewcommand\refname{Bibliografía} % References title
+
+\begin{document}
+
+\title{Diseño de redes de transporte por Optimización de Colonia de Abejas}
+\author{Martínez Flores Jorge Yael}
+\date{30 de noviembre del 2018}
+\maketitle
+
+\section{Introducción}
+
+Un correcto diseño de las redes de transporte puede mejorar el  modo en que 
+opera el transporte público. Este corresponde a un problema de optimización 
+de clase combinatorio, con una solución difícil de encontrar, ya que existen 
+múltiples variables en juego, como el número de autobuses disponibles, la 
+demanda de pasajeros y el presupuesto disponible y estas al tomar en cuenta 
+diferentes intereses entran en conflicto. Entonces se trata de diseñar el 
+problema como  un problema de decisión de múltiples criterios, buscando 
+maximizar el número de pasajeros satisfechos y minimizar el número de autobuses 
+y el tiempo de viaje de los pasajeros.
+
+\section{Descripción del problema} 
+
+Sea $G=(N,A)$ una red donde $N$ es el conjunto de nodos y $A$ el conjunto de 
+aristas. Los nodos representan potenciales paradas de autobús mientras que 
+las aristas representan las calles.
+
+En el problema de diseño de redes de transporte buscamos el mejor conjunto de 
+rutas $R$. Se buscan las aristas $A$ que se puedan incluir en $R$, de tal manera
+que estas en conjunto formen las rutas de la red de tránsito.
+
+El principal valor que se usa para describir el nivel de la red es el tiempo 
+total de viaje tomado por los usuarios del servicio. Esta calidad de la 
+solución generada es expresada en minutos. Se calcula el tiempo total de 
+viaje de los pasajeros $T$ en la red de la siguiente manera:
+
+$$ T = TT + w_1TTR + w_2 TU $$
+
+\begin{itemize}
+    \itemsep0em 
+    \item $TT$: Tiempo a bordo de un vehículo de todos los pasajeros
+    \item $TTR$: Número total de transbordos en la red
+    \item $TU$: Número de pasajeros insatisfechos (cuando tiene que hacer dos o
+    más transbordes)
+    \item $w_1$: Penalización de tiempo por un transbordo
+    \item $w_2$: Penalización de tiempo por un pasajero insatisfecho
+\end{itemize}
+
+La calidad toma en cuenta el número de transbordos, los pasajeros lo usan 
+para cambiar de una ruta a otra, el número total de transbordos puede 
+reducirse optimizando la red.
+
+Sea $d_{ij}$ el número de viajes por unidad de tiempo entre el nodo $i$ y $j$.
+Sea D la matriz origen-destino $O-D$ denotada como:
+
+$$ D = \{ d_{ij} | i,j \in [1, 2, \dots , |N| ] \} $$
+
+Sea $tr_{ij}$ el vehículo por el cuál se trasladan entre el nodo $i$ y el 
+nodo $j$. Para este se tiene la matriz de tiempo de viaje:
+
+$$ TR = \{ tr_{ij} | i,j \in [1, 2, \dots, |N|] \} $$
+
+Suponiendo que nos dan la red $G=(N,A)$, la matriz $O-D$ y la de tiempo de 
+viaje $TR$.Y que los pasajeros escogen la ruta más corta, podemos 
+descomponer el diseño del transporte de redes en dos partes: La generación 
+de las rutas de transporte y la determinación de la frecuencia del 
+servicio para cada ruta.
+
+En resumen: Dado un conjunto de $n$ nodos, la matriz $O-D$ que describe la 
+demanda entre estos y la matriz de tiempo de viaje $TR$, genera un conjunto 
+de rutas de tránsito en una red tal que exista una manera de minimizar 
+el tiempo de viaje de los pasajeros $T$.
+
+\section{Solución propuesta}
+
+El problema de diseño de transporte en redes es  NP-Completo. Se ha intentado 
+con diferentes heurísticas y aproximaciones para encontrar una solución a 
+este problema. La propuesta para este caso está basada en la optimización de 
+la colonia de abejas (BCO, Bee Colony Optimization). BCO representa una de 
+las técnicas de inteligencia artificial de enjambre, la cuál es una técnica 
+basada en el estudio de sistemas compuestos por individuos que se comunican 
+entre ellos, intercambian información y realizan tareas en el mismo entorno.
+
+Este algoritmo está inspirado en el comportamiento de las abejas en la 
+naturaleza. Las abejas artificiales usan los principios del periodo de 
+recolección de néctar. La idea principal en BCO es crear una colonia 
+de abejas artificiales que sea capaz de resolver problemas de optimización 
+combinatoria. Estas exploran a través del entorno, buscando soluciones 
+factibles. Cada abeja artificial genera una solución al problema, pero para 
+descubrir la solución más optima, las abejas colaboran e intercambian 
+información, de esta manera se concentran en las áreas más prometedoras y van 
+descartando las menos óptimas.
+
+El algoritmo consiste en dos fases alternantes:
+\begin{enumerate}
+    \itemsep0em 
+    \item \textit{Forward pass:} Cada abeja explora el entorno y en un número
+    determinado de pasos construye o mejora la solución. Habiendo obtenido una 
+    solución, las abejas regresan al nido y empieza la siguiente fase.
+    \item \textit{Backward pass:} Todas las abejas comparten información de sus 
+    resultados, comparten la calidad de su solución y cada abeja decide con una 
+    cierta probabilidad abandonar la solución obtenida y volverse un seguidor 
+    o bailar y así reclutar a compañeros antes de regresar a la solución 
+    obtenida. Las abejas con soluciones de mejor calidad tienen una mayor 
+    posibilidad de continuar su exploración. 
+\end{enumerate}
+
+Estas dos fases son realizadas iterativamente hasta que suceda una condición 
+de paro como puede ser que el número máximo de fases haya terminado o que no 
+haya incremento en la calidad de la solución, entre otras.
+
+Se propone que el algoritmo BCO trabajando en diseño de redes de transporte 
+primero generará una red de transporte inicial factible. Después, las abejas 
+artificiales investigan el entorno a partir de la solución propuesta e 
+intentan mejorarlo Suponemos que al inicio del diseño de la red, todas las 
+abejas están en la colmena. La cual es una ubicación artificial que no está 
+conectada con las líneas de la red.
+
+\section{Solución inicial}
+
+Consideremos la linea $l$ cuyos nodos terminales son $i$ y $j$.
+Sea $N_l$ el conjunto de nodos conectados por la línea $l$. Esta linea 
+será usada por los pasajeros que usarán el servicio directo (pasajeros que 
+usan toda la línea desde el nodo de inicio hasta el nodo final), como habrá 
+mas pasajeros que usarán la red con transbordo, denotamos a $ds_{ij}$ como 
+el número de pasajeros que usarán el servicio directo:
+
+$$ ds_{ij} = \sum_{m \in N_l} \sum_{n \in N_l}  d_{mn}$$
+
+Denotamos a $DS$ como la matriz que contiene la información de los pasajeros que
+usan este servicio directo:
+
+$$ DS = \{ ds_{ij} | i,j \in [1, 2, \dots , |N|] \}$$
+
+Se propone un algoritmo glotón para generar la solución inicial. En este se
+tratará de conectar pares de nodos con los valores $ds_{ij}$ mas altos. De 
+esta manera se intenta incrementar el número de pasajeros que usan el 
+servicio directo.
+
+\begin{enumerate}
+    \itemsep0em 
+    \item Sea $Y$ el número total de líneas ($NTL$) de autobuses en la red. 
+    Sea $Y = \phi$. Sea $m = 1$.
+    \item Sean $(a,b)$ el par de nodos con los valores $ds_{ij}$ más altos. 
+    Ahora $a$ y $b$ son los nodos terminales de una nueva línea $l$ de autobuses.
+    Se busca el camino más corto entre estos dos nodos. Los nodos que 
+    pertenezcan a este camino serán las estaciones de línea de autobús. 
+    Agrega $l$ a $Y$.
+    \item Actualiza matriz $DS$ sin tener en cuenta la demanda de pasajeros 
+    que se satisfacen.
+    \item Si $m + NTL$, para. En otro caso, $m = m + 1$ y regresa al paso 2.
+\end{enumerate}
+
+\section{Modificación de la solución}
+
+La modificación principal de BCO para este problema es el uso de  abejas 
+heterogéneas. Es decir se resolverán el problema utilizando dos conjuntos 
+diferentes de abejas artificiales. Abejas de tipo 1 y abejas de tipo 2. 
+Estas difieren en la manera en la que modifican sus soluciones, respecto a 
+hacer decisiones acerca de la lealtad, así como de unirse o ser reclutadora,
+ ambas abejas se comportan de la misma manera.
+
+\subsection{Abejas tipo 1}
+
+La abeja tipo 1 escoge una línea del conjunto de líneas de autobuses basándose
+en la probabilidad calculada de la siguiente manera:
+
+$$ p_l = \frac{\frac{1}{ds_{ij}}}{\sum_{q \in L} \frac{1}{ds_{rs}}} $$
+
+\begin{itemize}
+    \itemsep0em 
+    \item $i,j$: Terminales de la línea $l$
+    \item $L$: Conjunto de líneas de autobuses
+    \item $r,s$: Terminales de la línea $q$
+    \item $ds_{ij}$: Número total de pasajeros que pueden viajar sin hacer algún
+    transbordo.
+\end{itemize}
+
+Supongamos que la abeja tipo 1 escoge una línea cuyos terminales son $i$ y $j$.
+La abeja 1 escoge entre uno de estos dos terminales. Supongamos que escoge $i$. 
+La abeja tipo 1 descarta esta línea de autobús para crear una nueva línea, 
+ahora entre el nodo $i$ y el nuevo nodo terminal $k$, el cuál puede ser 
+escogido con la probabilidad mencionada anteriormente.
+
+Suponemos que la abeja escoge el nodo $k$ para ser el nuevo terminal. La abeja 
+busca el camino mas corto entre los nodos $i$ y $k$. Este camino mas corto es
+la nueva ruta de autobús.
+
+\subsection{Abejas tipo 2}
+
+La abeja tipo 2 escoge una línea de autobús, después escoge de manera 
+aleatoria entre los dos terminales de la línea. Supongamos escoge $j$. 
+Ahora la abeja descarta este nodo terminal con probabilidad igual a $P$. 
+La nueva línea generada de autobús contiene todas las anteriores paradas 
+de autobús, excepto el terminal descartado. De esta manera esta línea es 
+recortada. Si el nodo terminal sobrevive, se escoge una nueva parada de los 
+nodos adyacentes al nodo terminal para ser agregada a la línea de autobús. 
+En el caso para la gráfica, el nodo $k$ fue seleccionado para agregarse a la 
+línea de autobús y la línea se expande.
+
+\section{Reclutamiento}
+
+En el caso en el que las abejas no quieran usar la solución generada 
+anteriormente, la abeja comenzará a bailar y seguirá a otra abeja, las abejas 
+mientras realizan su baile informan de diferentes soluciones a abejas cercanas. 
+La probabilidad de que la solución del reclutador $b$ sea escogida por cualquier 
+abeja es:
+
+$$ p_b = \frac{O_b}{\sum^{R}_{k=1} O_k}, b = 1, 2, \dots, R $$
+\begin{itemize}
+    \itemsep0em 
+    \item $O_k$: Función objetivo de la $k$-ésima solución
+    \item $R$: Número de reclutadoras
+\end{itemize}
+
+Con esta probabilidad una abeja se unirá a una abeja que baila (o reclutadora). 
+Las reclutadoras y sus compañeros reclutados realizan la exploración en el 
+siguiente \textit{forward pass}.
+
+\section{Evaluación}
+
+Para un ejemplo de evalauación del algoritmo BCO se proponen los siguientes 
+parámetros basados en la experiencia, esto valores tienden a que cada 
+iteración sea más corta, pero no lo suficientemente larga como para obtener 
+conocimiento de cada iteración.
+
+\begin{itemize}
+    \itemsep0em 
+    \item Abejas: 10
+    \item \textit{passes} por iteracion: 5
+    \item Cambios en \textit{forward pass}: 2
+    \item Penalización por pasajeros insatisfechos: 
+    Tiempo promedio de viaje + 50 minutos
+    \item Probabilidad de que una abeja destruya un terminal: 0.2
+    \item Número de iteraciones: 400
+\end{itemize}
+
+Se usan los siguientes parámetros de comparación:
+
+\begin{itemize}
+    \itemsep0em 
+    \item $d_0$: Porcentaje de demanda satisfecha sin transbordos
+    \item $d_1$: Porcentaje de demanda satisfecha con un transbordo
+    \item $d_2$: Porcentaje de demanda satisfecha con dos transbordos
+    \item $d_{un}$: Porcentaje de demanda insatisfecha
+    \item ATT: Promedio de tiempo de viaje.
+\end{itemize}
+
+El experimento es realizado en una red de autobús con 110 nodos y 275 aristas, 
+el número total de viajes es 3,603,360. Se deben generar 55 líneas de autobús. 
+El máximo de paradas por línea de autobús es 29.
+
+En la tabla presentamos las dos soluciones propuestas, la primera por el 
+algoritmo glotón y la segunda usando BCO, nótese que BCO mejora 
+significativamente la solución inicial.
+
+\begin{table}[tph!]
+        \begin{tabular}{|l|l|l|}
+        \hline
+        \rowcolor[HTML]{DAE8FC} 
+        Características \textbackslash Algoritmo & Algoritmo glotón              & BCO                  \\ \hline
+        Viajes sin transbordo                    & $1,438,572$ ($d_0 = 39.42\%$) & ($d_0 = 59.65\%$)    \\ \hline
+        Viajes con un transbordo                 & $1,607,740$ ($d_1 = 44.62\%$) & ($d_1 = 40.10\%$)    \\ \hline
+        Viajes con dos transbordos               & $224,480$ ($d_2 = 6.23\%$)    & ($d_2 = 0.25\%$)     \\ \hline
+        Pasajeros insatisfechos                  & $332,568$ ($d_{un} = 9.23\%$) & ($d_{un} = 0\%$)     \\ \hline
+        Promedio de tiempo de viaje              & (ATT = $34.90$ min.)          & (ATT = $36.16$ min.) \\ \hline
+        \end{tabular}
+    \end{table}
+
+El tiempo de viaje promedio ATT está compuesto de $36.16 = 34.13 + 20.3$
+
+El primer sumando es el tiempo promedio de viaje, el segundo sumando es la 
+penalización por usuario causado por él transborde. Para mejorar la estimación 
+de la calidad calculamos el tiempo de viaje promedio por pasajero el cual 
+usa el camino más corto en su viaje. Este tiempo promedio es $33.84$ min. 
+Ninguna otra red de transporte debe ser menor a este valor, ya que representa 
+la cota inferior. El tiempo de viaje promedio obtenido por BCO es 
+relativamente cercano a la cota inferior, entonces podemos concluir que la 
+calidad de la solución generada por BCO es relativamente alta.
+
+\begin{thebibliography}{99}
+
+\bibitem{Milos Nikolic, Dusan Teodorovic}
+(2013) \textit{Transit network design by Bee Colony Optimization}. 
+28 de noviembre del 2018, de ElSevier 
+Sitio web: https://www.sciencedirect.com/science/article/pii/S0957417413002881
+
+\end{thebibliography}
+
+\end{document}

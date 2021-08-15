@@ -6,7 +6,7 @@ Repo of file practices of the university, computer science career
 1. Introduction to computer science: Java and Apache Ant
 2. Data structures: Java and Apache Ant
 3. Modeling and programming: Java and Python
-4. Computacional Logic: Haskell
+4. Computacional Logic: Haskell, Prolog and Coq
 5. Automata and formal languages: Java
 6. Algorithm analysis: Java
 7. Database fundamentals: Java and SQL

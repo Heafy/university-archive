@@ -1,0 +1,227 @@
+\documentclass{article}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[spanish]{babel} % Spanish language
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc} % For accents
+\usepackage{geometry}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\geometry{a4paper, total={150mm,240mm}, left=25mm, top=25mm} 
+\newcommand{\flecha}{$\,\to\,$ }
+\title{Dependencias Funcionales}
+\author{Computólogos A.C. \and Taquerías Tacoste}
+\date{Ultima actualización: Enero 04, 2018}
+
+\begin{document}
+
+\maketitle
+
+A continuación se enlistan las dependencias funcionales:
+
+\begin{itemize}
+
+\item \texttt{TaqueroMucho(\ldots)}
+	\begin{itemize}
+	\item \textbf{CURP, idTarjeta\flecha CantidadPuntos.}\\
+		  La cantidad de puntos depende del CURP y del idTarjeta, solamente vamos a tener una saldo por cliente y tarjeta Taquero Mucho.
+	\end{itemize}
+
+\item \texttt{Cliente(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha Nombre(s), Ap\_Paterno, Ap\_Materno.}\\
+		  Es decir, cada cliente tiene solamente un nombre.		
+		\item \textbf{CURP \flecha Calle, Colonia, CP, Estado, NumExt, NumInt}\\
+		Ya que cada cliente tiene solamente una dirección.
+		\item \textbf{CURP \flecha Telefono.}\\
+		Pues cada cliente tiene solamente un teléfono.
+		\item \textbf{CURP \flecha Email.}\\
+		Aquí, con cada cliente tiene solamente un correo.
+		\item \textbf{CURP \flecha Sexo.}\\
+		En cada cliente solamente tiene un sexo.	
+	\end{itemize}
+
+\item \texttt{Comprar(\ldots)}
+	\begin{itemize}
+		\item \textbf{$\hbox{CURP} \twoheadrightarrow \hbox{Tipo.}$}\\
+		Una persona puede comprar muchas salsas.		
+	\end{itemize}
+
+\item \texttt{Salsa(\ldots)}
+	\begin{itemize}
+		\item \textbf{Nombre \flecha Ingredientes, NivelPicor, Recomendaciones.}\\
+		El tipo de la salsa determina todos sus datos.
+	\end{itemize}
+
+\item \texttt{Consumir(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP, idConsumible, Fecha \flecha ADomicilio.}\\
+		CURP, Nombre y Fecha determinan funcionalmente a ADomicilio ya que si un cliente consume un consumible más de una ocasión, se violaría la dependencia.
+	\end{itemize}
+
+\item \texttt{Consumible(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha Cantidad, Descripción, Nombre, Precio.}\\
+		El id de cada consumible sus atributos, es decir, determina su cantidad, su descripción, su nombre y su precio.
+	\end{itemize}
+
+\item \texttt{Entradas(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{DelCazo(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Sopes/Huaraches(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Enchiladas(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Quesos(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Ensaladas(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Gringas/Quecas/Volcanes(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Alambres(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Hamburguesas(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Tacos(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Tortas(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Bebidas(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Postres(\ldots)}
+	\begin{itemize}
+		\item \textbf{idConsumible \flecha idConsumible.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Empleado(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha Nombre(s), Ap\_Paterno, Ap\_Materno.}\\
+		 Es decir, cada empleado tiene solamente un nombre.		
+		\item \textbf{CURP \flecha Calle, Colonia, CP, Estado, NumExt, NumInt}\\
+		Ya que cada empleado tiene solamente una dirección.
+		\item \textbf{CURP \flecha Telefono.}\\
+		Pues cada empleado tiene solamente un teléfono.
+		\item \textbf{CURP \flecha Email.}\\
+		Aquí, con cada empleado tiene solamente un correo.
+		\item \textbf{CURP \flecha Sexo.}\\
+		Cada empleado tiene solamente un sexo.
+	\end{itemize}
+
+\item \texttt{Parrilero(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha CURP.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Taquero(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha CURP.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Mesero(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha CURP.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Cajero(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha CURP.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Tortillero(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha CURP.}\\
+		Es trivial.
+	\end{itemize}
+
+\item \texttt{Repartidor(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha NumeroLicencia, Transporte.}\\
+		Los repartidores solamente tienen una licencia y pueden tener un transporte de trabajo.
+	\end{itemize}
+
+\item \texttt{Trabajar(\ldots)}
+	\begin{itemize}
+		\item \textbf{CURP \flecha ID\_Sucursal.}\\
+		Un empleado solamente puede trabajar en una sucursal.
+		\item \textbf{$\hbox{ID\_Sucursal} \twoheadrightarrow \hbox{CURP.}$}\\
+		Una sucursal puede tener muchos empleados.
+	\end{itemize}
+
+\item \texttt{Sucursal(\ldots)}
+	\begin{itemize}
+		\item \textbf{ID\_Sucursal \flecha Nombre.}\\
+		Una sucursal sólo tiene un nombre.
+	\end{itemize}
+
+\item \texttt{Tener(\ldots)}
+	\begin{itemize}
+		\item \textbf{$\hbox{ID\_Sucursal} \twoheadrightarrow \hbox{idProducto.}$}\\
+		Una sucursal puede tener muchos productos.
+		\item \textbf{$\hbox{idProducto} \twoheadrightarrow \hbox{idSucursal.}$}\\
+		Un producto puede estar en muchas sucursales.
+	\end{itemize}	
+
+\item \texttt{Producto(\ldots)}
+	\begin{itemize}
+		\item \textbf{idProducto \flecha FechaCompra, FechaCaducidad, UnidadesInventario, Marca, Precio, Proveedor.}\\
+		Es decir, idProducto determina todos sus atributos.\\
+	\end{itemize}
+
+
+\end{itemize}
+
+\end{document}
+\grid

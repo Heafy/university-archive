@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[spanish]{babel} % Spanish language
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc} % For accents
+\usepackage{geometry}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\geometry{a4paper, total={150mm,240mm}, left=25mm, top=25mm} 
+\title{Diccionario de Datos}
+\author{Computólogos A.C. \and Taquerías Tacoste}
+\date{Ultima actualización: Enero 09, 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Taquero\_Mucho(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo          & Tipo de Dato & Longitud & Descripción                        \\ \hline
+		idTarjeta      & number       & /       & Número de la tarjeta única.        \\ \hline
+		CantidadPuntos & number       & /        & Cantidad de puntos en una tarjeta. \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Cliente(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo       & Tipo de Dato & Longitud & Descripción                             \\ \hline
+		Nombre(s)   & varchar      & 255      & Nombre del cliente.                     \\ \hline
+		Ap\_Paterno & varchar      & 255      & Apellido paterno del cliente.           \\ \hline
+		Ap\_Materno & varchar      & 255      & Apellido materno del cliente.           \\ \hline
+		Calle       & varchar      & 255      & Calle donde vive del cliente.           \\ \hline
+		Sexo 	    & varchar      & 9        & Sexo del cliente.                       \\ \hline
+		NumExt      & number       & /        & Número exterior donde vive del cliente. \\ \hline
+		NumInt      & number       & /        & Número interior donde vive del cliente. \\ \hline
+		Colonia     & varchar      & 255      & Colonia donde vive del cliente.         \\ \hline
+		Estado      & varchar      & 255      & Estado donde vive del cliente.          \\ \hline
+		Email       & varchar      & 255      & Correo del cliente.                     \\ \hline
+		CP          & number       & /        & Código postal donde vive del cliente.   \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Salsa(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo           & Tipo de Dato & Longitud & Descripción                  \\ \hline
+		Nombre          & varchar      & 255      & Nombre de la salsa.          \\ \hline
+		Nivel\_Picor    & varchar      & 7        & Nivel de picor de la salsa.  \\ \hline
+		Recomendaciones & varchar      & 255      & Recomendaciones de la salsa. \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Comprar(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo      & Tipo de Dato & Longitud & Descripción                             	\\ \hline
+		Fecha      & date         & /        & Fecha en la cual se realizó la compra.	\\ \hline
+		ADomicilio & varchar      & 1        & Se se requiere servicio a domicilio o no. \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Consumir(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo      & Tipo de Dato & Longitud & Descripción                             	\\ \hline
+		Fecha      & date         & /        & Fecha en la cual se realizó la compra.	\\ \hline
+		ADomicilio & varchar      & 1        & Se se requiere servicio a domicilio o no. \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Consumible(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo        & Tipo de Dato & Longitud & Descripción               \\ \hline
+		idConsumible & number       & /        & ID del consumible.         \\ \hline
+		Nombre       & varchar      & 30       & Nombre del consumible..    \\ \hline
+		Cantidad     & number       & /        & Cantidad del consumible.   \\ \hline
+	 	Precio       & decimal      & (5,2)    & Precio del consumible.     \\ \hline
+		Descripción  & varchar      & 200      & Descripción del consumible. \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Empleado(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo       & Tipo de Dato & Longitud & Descripción                              \\ \hline
+		Nombre(s)   & varchar      & 255      & Nombre del empleado.                     \\ \hline
+		Ap\_Paterno & varchar      & 255      & Apellido paterno del empleado.           \\ \hline
+		Ap\_Materno & varchar      & 255      & Apellido materno del empleado.           \\ \hline
+		Calle       & varchar      & 255      & Calle donde vive del empleado.           \\ \hline
+		Sexo 	    & varchar      & 9        & Sexo del empleado.                       \\ \hline
+		NumExt      & number       & /        & Número exterior donde vive del empleado. \\ \hline
+		NumInt      & number       & /        & Número interior donde vive del empleado. \\ \hline
+		Colonia     & varchar      & 255      & Colonia donde vive del empleado.         \\ \hline
+		Estado      & varchar      & 255      & Estado donde vive del empleado.          \\ \hline
+		Email       & varchar      & 255      & Correo del empleado.                     \\ \hline
+		CP          & number       & /        & Código postal donde vive del empleado.   \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Repartidor(\ldots)}}	
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo         & Tipo de Dato & Longitud & Descripción                        \\ \hline
+		Num\_Licencia & number       & /        & Número de licencia del repartidor.	\\ \hline
+		Transporte    & varchar      & 11       & Transporte del repartidor.        \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Sucursal(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo  & Tipo de Dato & Longitud & Descripción            \\ \hline
+		Nombre & varchar      & 25       & Nombre de la sucursal. \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{\texttt{Producto(\ldots)}}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Campo                & Tipo de Dato & Longitud & Descripción                          \\ \hline
+		id\_Producto         & number       & /        & ID del producto.                     \\ \hline
+		Fecha\_Compra        & date         & /        & Fecha de compra  del producto.       \\ \hline
+		Fecha\_Caducidad     & date         & /        & Fecha de caducidad del producto.     \\ \hline
+		Unidades\_Inventario & number       & /        & Unidades en inventario del producto. \\ \hline
+        Marca                & varchar      & 40       & Marca del producto.         		  \\ \hline
+		Precio               & decimal      & (5,2)    & Precio del producto.                 \\ \hline
+		Proveedor            & varchar      & 40       & Proveedor del producto.              \\ \hline
+	\end{tabular}
+\end{table}
+
+\end{document}

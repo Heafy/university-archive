@@ -1,0 +1,104 @@
+
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=letter, fontsize=12pt]{scrartcl} % Letter paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[spanish]{babel} % Spanish language
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc} % For accents
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Fundamentos de Bases de Datos} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.5cm] % Thin top horizontal rule
+\huge Bernardo y Leviatán \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Jorge Yael Martínez Flores} % Your name
+
+\date{} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT
+%----------------------------------------------------------------------------------------
+
+\section*{Resumen}
+
+En este libro de ciencia ficción tenemos como protagonista al doctor Bernardo Seler, en un pasado alternativo relativamente cercano donde la tecnología nos ha abordado más de lo que ya lo ha hecho actualmente. Donde los sistemas ya buscan la unificación, las casas ya funcionan con un sistema conectado entre toda la casa con alarma policial incluida, y las personas ya llevan un chip de identificación que no solo guarda el nombre y la ubicación del que lo porta, si no es además una manera de identificación entre las computadoras y las personas. Bajo este panorama, el doctor Seler  empieza un trabajo en la clínica psiquiátrica Madox, donde después de pasar una rápida recapitulación de los pacientes de la clínica nos damos cuenta que el trabajo principal de el Dr. Seler y en enfoque del libro será el caso del paciente llamado Tomas Bit, un nombre otorgado por la clínica, ya que no pudieron identificarlo ni por sus huellas que estaban destruidas y sus registros dentales eran irreconocibles, asi que no hubo una manera de identificarlo ni de saber algo acerca de su pasado, un pasado que Tomas prefería no recordar.\vspace{4mm}
+
+A pesar de que este no es un paciente considerado peligroso, pero todos los doctores que lo han tratado al parecer no han cumplido una serie de reglas que el estipula como tomar notas exclusivamente a mano para su caso, lo cual hace que no les otorgue su confianza. Algo que cambia hasta que el doctor Seler sigue las reglas lo que hace que se gane su confianza y este empieza a relatarle poco a poco su pasado. En el cual Tomas Bit (su verdadero nombre es Daniel Newman) era uno de los mejores desarrolladores de software que existían y fué contratado para  un proyecto llamado Archivo de la Humanidad, el cual desde hace mucho tiempo juntaba información de la humanidad mediante diferentes medios, pero querían crear un sistema que era capaz de saber todo sobre cada persona, con información, comportamiento, gustos, actividad bancaria, etc. Además de que tenía la capacidad de relacionarlo con las demás personas, ya sean amigos, conocidos o incluso buscara información sobre ellos en internet, todo esto lo hacía juntando información mediante diferentes dispositivos electrónicos. Aunque al Dr. Seler le cuesta mucho trabajo entender esto y más de una vez piensa que es una historia creada por Tomas como mecanismo de defensa para ocultar lo que le atormenta realmente Tomas busca demostrar la veracidad de su historia demostrándoselo con uno de sus dibujos como regalo.\vspace{4mm}
+
+Pero el dibujo no es simplemente eso, es una serie de instrucciones donde cada raya es un uno y cada punto es un cero. El cual se interpreta como código binario, hasta que el Dr. Seler puede comprobar y escanear este dibujo en su casa Tomas le interpreta información con el resultado obtenido, con datos personales, bancarios, de relaciones, y de cualquier tipo, incluso información que no es publica, el Dr. Seler sigue escéptico pero logra entender que las historias que el le cuenta son ciertas.\vspace{4mm}
+
+Aun así Tomas busca redimirse y busca crear un plan bastante elaborado, donde después de fingir su muerte y desaparecer le da a Bernardo una serie de instrucciones complejas y que llegan por varias maneras y a través de varios retos para poder acabar con este programa desde una puerta trasera que el construyó años atras, interpretaba unos y ceros escondidos entre las pinturas los cuales tenían el ejecutable para destruir este programa, a través de esto el programa es destruido y la paz parece alcanzar la vida del Dr. Seler, pero todavía le falta por conocer a un amigo encubierto de Tomas para poder dar por terminado el Archivo de la Humanidad y darse cuenta del impacto que tuvo al eliminar el programa.\vspace{4mm}
+
+%------------------------------------------------
+
+\section*{Objetivo del autor}
+
+Agustín Pedrote nos intenta alertar de los peligros del manejo de la información y como todo lo que hacemos puede ser monitoreado, desde los registros y busquedas que hacemos en internet, hasta nuestro historial crediticio o las cosas que compramos y en donde las compramos. Hoy en día proporcionamos mucha información en internet y tal vez no nos percatamos. Facebook sabe tu nombre, tu edad, donde vives y hasta que estudiaste, tu banca sabe que compras y en donde lo compras, todos estos datos se mantienen esparcidos en diferentes bases de datos pero bajo tu mismo nombre e identificación, no sabemos si ya existe un programa que relacione a cada individuo y su actividad relacionada con cualquier base de datos en cualquier lado. Por su complejidad espero que no, pero no hay que descartar la posibilidad de que esto sea posible.
+
+%------------------------------------------------
+
+\section*{Temática central}
+
+La temática principal del libro es la captura y manejo de datos, a pesar de que Big Data y su potencial a largo plazo, hablando hipotéticamente, el Big Data es la evolución de las bases de dato como manera de almacenar los datos, pero este programa también tuvo la capacidad de relacionar estos datos para cada persona,logrando obtener los datos y posteriormente hacer las conexiones necesarias para enlazarlo con los demás datos obtenidos para cada persona sobre la que se deseara buscar información.\vspace{4mm}
+
+Hoy en día el manejo de información de esta manera ya es una realidad, pudiendo almacenar mas tipos de información mas allá del texto plano, analizan comportamientos, maneras de escribir, costumbres y hábitos y al almacenarlos les damos sentido de pertenencia respecto a una persona y al fin y al cabo esto es información de uno mismo, ya sabemos que usan nuestros patrones de búsqueda para saber que publicidad vendernos, nuestro comportamiento para comprobar que no somos un robot y solo ellos saben para que más usan los datos.
+
+%------------------------------------------------
+
+\section*{Consideraciones personales}
+
+En la curiosidad respecto a todos los temas de Computación que se ha despertado en mi a través de los últimos años he podido aprender un poco sobre Seguridad Informática, aprendí y me percaté del potencial riesgo al que estamos expuestos al poner información sobre nosotros en internet, una investigación podría obtener nuestros datos como donde vivimos, que nos gusta hacer, nuestro correo y nuestro número telefónico, además de fotos de cualquier tipo compartidas, incluso podrían encontrar nuestra tarjeta bancaria si no somos los suficientemente precavidos, desde es entonces he sido más precavido y moderado respecto a mi información recolectada en internet, ya que como he comentado no sabemos que uso le estén dando a esta información y supongo que todos quieren que no se sepan ciertas cosas. El futuro planteado en la novela no es un futuro que me gustaría vivir, aunque estar almacenado y saber ciertas cosas si considero conveniente, hay cosas que por el otro lado no apoyo y prefiero que no se sepan para y por ninguna persona.
+
+%------------------------------------------------
+
+\section*{Opinión}
+
+Además del Big Data y el manejo de la información, el relato nos muestra el un presente futurista, el cual podría ser una evolución de temas que también se manejan actualmente, uno de ellos es donde su hogar está conectado completamente desde su entrada, con identificador, una unidad de procesamiento que puede hacer llamadas de emergencia, una computadora que responde a los comentarios de voz y al parecer siempre está encendida o al menos lista para funcionar en cualquier momento.\vspace{4mm}
+
+Cada vez hay más dispositivos conectados a la red Wi-Fi del hogar, y este desde hace unos años se empezó a conectar por casi todos lados, desde las bombillas de colores controladas por el celular, timbres inteligentes con transmisión en vivo, hasta autos conectados, pero esto para mí siguen siendo datos, que no sabemos si pueden estar completamente relacionados con uno o no.
+
+%------------------------------------------------
+
+\section*{¿Recomendarla o no?}
+
+Mi género favorito tanto de libros como de películas es la ciencia ficción, así que en Bernardo y Leviatán encontré un libro interesante, mezclando la ficción con una pseudo realidad, porque no dudo que pueda llegar el día donde la humanidad adopte la tecnología a este nivel, de nosotros depende si dejamos que llegue hasta ese nivel, pero aun así me pareció una historia bien planteada, donde las únicas dudas que me llegan a la mente son: ¿Cómo sabia que el programa iba a funcionar si nunca lo había ejecutado? ¿Cómo podía generar tanto código en binario sin tener errores? La única respuesta que puedo encontrar es que Daniel Newman era uno de los mejores programadores de ese entonces, aun así no encuentro huecos en la historia y el plan que crean es muy elaborado pero fue funcional.\vspace{4mm}
+
+Por supuesto que es un libro que recomendaría a alguien que quisiera leer sobre ciencia ficción y busque un tema novedoso sobre el que no se há tenido mucho énfasis.
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

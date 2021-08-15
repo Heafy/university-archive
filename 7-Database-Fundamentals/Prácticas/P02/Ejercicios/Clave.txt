@@ -1,0 +1,2 @@
+El proyecto se puede correr como proyecto de Netbeans.
+Después el programa proporcionará las instrucciones.
